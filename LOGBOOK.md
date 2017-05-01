@@ -58,10 +58,39 @@ An Introduction
 
 Some of the papers may not be completely relevant to the project.
 
-## 20-04-2017 (Friday, week 3)
+## 21-04-2017 (Friday, week 3)
 ### General
 This simple concept map has been produces for the literature overview:
 ![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/cmap.png)
 
 ### Literature
 An early version of the literature review has been written using six of the collected sources. It contains only the most relevant sources, and as such does not discuss many algorithms or applications.
+
+## 23-04-2017 (Sunday, week 3)
+### Simulator
+![AirSim](https://github.com/Microsoft/AirSim) is a simulator for autonomous drone research. It allows you to fly a drone in any unreal environment. The build process is complicated, and the performance poor. The built-in traning data recorder does not work, but there is an API available to get hold of it.
+
+## 24-04-2017 (Monday, week 4)
+### General
+Meeting with supervisor. Discussed the simulator progress and upcoming project proposal presentation and document.
+
+Next meeting: 26-04-2017 (Wednesday, week 4)
+
+Objectives:
+* Investigate DAGGER algorithm
+* Investigate AirSim simulator
+* Send project proposal slides for feedback (Tuesday)
+
+### Literature
+Collected:
+* Daftry 2016 - Learning transferable policies for monocular reactive mav control
+
+## 25-04-2017 (Tuesday, week 4)
+### General
+Created project propsal slides and received feedback on them.
+
+## 26-04-2017 (Wednesday, week 4)
+### General
+Meeting with supervisor. Little progress since last meeting, so not much to discuss. Supervisor is abroad next week, so the next meeting is not until the week after. In the mean time the objective is to implement DAGGER according to the berkeley RL course, and set up the interaction on a simulator. 
+
+## 01-05-2017 (Monday, week 5)
