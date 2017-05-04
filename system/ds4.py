@@ -5,6 +5,7 @@ class ds4():
     BUTTON_LAND = 'R1'
     BUTTON_UP = 'cross'
     BUTTON_DOWN = 'circle'
+    BUTTON_RESET = 'square'
 
     axis_map = {0: 'left_horizontal', 1: 'left_vertical', 2: 'L2_axis', 3: 'right_horizontal',
                 4: 'right_vertical', 5: 'R2_axis', 6: 'leftright', 7: 'updown'}
@@ -28,7 +29,7 @@ class ds4():
         while True:
             try:
                 event_buffer = os.read(self.device, 8)
-            except BlockingIOError:
+            except:
                 break
 
             time, value, event_type, number = struct.unpack('IhBB', event_buffer)
@@ -42,13 +43,16 @@ class ds4():
                     if self.debug: print('LAND')
                     buttons.append('LAND')
 
+                elif self.button_map[number] == self.BUTTON_RESET and value == 1:
+                    if self.debug: print('RESET')
+                    buttons.append('RESET')
+
                 elif self.button_map[number] == self.BUTTON_UP:
                     if value == 1:
                         if self.debug: print('UP')
                         self.persistent_buttons.append('UP')
                     elif value == 0:
                         self.persistent_buttons.remove('UP')
-
 
                 elif self.button_map[number] == self.BUTTON_DOWN:
                     if value == 1:
@@ -81,6 +85,9 @@ class ds4():
         elif len(buttons) == 0 and len(axes) == 0:
             return 'HOVER'
 
+        elif 'RESET' in buttons:
+            return 'RESET'
+
         elif 'TAKEOFF' in buttons:
             self.airborne = True;
             return 'TAKEOFF'
@@ -91,35 +98,12 @@ class ds4():
 
         elif 'UP' in buttons:
             return 'UP'
+
         elif 'DOWN' in buttons:
             return 'DOWN'
 
-
-
-
-
-
-        # if type & 0x80:
-        #      print("(initial)")
-        #
-        # if type & 0x01:
-        #     button = button_map[number]
-        #     if button:
-        #         button_states[button] = value
-        #         if value:
-        #             print "%s pressed" % (button)
-        #         else:
-        #             print "%s released" % (button)
-        #
-        # if type & 0x02:
-        #     axis = axis_map[number]
-        #     if axis:
-        #         fvalue = value / 32767.0
-        #         axis_states[axis] = fvalue
-        #         print "%s: %.3f" % (axis, fvalue)
-
-controller = ds4()
-while True:
-    action = controller.get_action()
-    print(action)
-    time.sleep(1/10)
+# controller = ds4()
+# while True:
+#     action = controller.get_action()
+#     print(action)
+#     time.sleep(1/10)

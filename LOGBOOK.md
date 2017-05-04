@@ -91,6 +91,23 @@ Created project propsal slides and received feedback on them.
 
 ## 26-04-2017 (Wednesday, week 4)
 ### General
-Meeting with supervisor. Little progress since last meeting, so not much to discuss. Supervisor is abroad next week, so the next meeting is not until the week after. In the mean time the objective is to implement DAGGER according to the berkeley RL course, and set up the interaction on a simulator. 
+Meeting with supervisor. Little progress since last meeting, so not much to discuss. Supervisor is abroad next week, so the next meeting is not until the week after. In the mean time the objective is to implement DAGGER according to the berkeley RL course, and set up the interaction on a simulator.  
+
+The project proposal slides have been expanded upon in the project proposal document, due tonight.
+
+### Simulator
+Another possible simulator is the ROS-based ARDrone simulator. To be investigated.
 
 ## 01-05-2017 (Monday, week 5)
+### Simulator
+The ROS-based tum_simulator runs well and is easier to interact with tham AirSim. Manual control is possible using a DS3 controller. A DS4 controller needs remapping. AirSim performance can be brought to a usable level by lowering the quality settings.
+
+## 03-05-2017 (Wednesday, week 5)
+### Simulator
+The ROS simulator easily outputs a video stream. A python layer has been created inbetween the joystick and the simulator, which maps controller inputs to actions in a basic action space (TAKEOFF, LAND, UP, DOWN, HOVER).
+
+## 04-05-2017 (Thursday, week 5)
+### Simulator
+The actions from the python layer are now passed to the simulator. They reveal two major issues:
+* The takeoff action causes the drone to rise indefinitely
+* The hover action is very unstable, with the drone swerving around trying to balance itself.

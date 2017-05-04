@@ -1,2 +1,4 @@
 literature/
 notes/
+*.pyc
+__pycache__
