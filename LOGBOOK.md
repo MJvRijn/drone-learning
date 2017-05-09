@@ -111,3 +111,20 @@ The ROS simulator easily outputs a video stream. A python layer has been created
 The actions from the python layer are now passed to the simulator. They reveal two major issues:
 * The takeoff action causes the drone to rise indefinitely
 * The hover action is very unstable, with the drone swerving around trying to balance itself.
+
+## 08-05-2017 (Monday, week 6)
+## Simulator
+The following action space is now available in the simulator:
+* Forward
+* Backward
+* Left
+* Right
+* Up
+* Down
+* Clockwise (yaw)
+* Anticlockwise (yaw)
+
+## 08-05-2017 (Tuesday, week 6)
+## Simulator
+The simulator now allows for the recording and playback of training data (command (action) and image (state))
+
