@@ -124,7 +124,28 @@ The following action space is now available in the simulator:
 * Clockwise (yaw)
 * Anticlockwise (yaw)
 
-## 08-05-2017 (Tuesday, week 6)
+## 09-05-2017 (Tuesday, week 6)
 ## Simulator
 The simulator now allows for the recording and playback of training data (command (action) and image (state))
+
+## 11-05-2017 (Thursday, week 6)
+# General
+Meeting with supervisor. The progress with the simulator has been discussed.
+
+Next meeting: 17-05-2017
+
+Objectives:
+* Create a placeholder model training system, with tensorflow or equivalent.
+* Use it to implement DAGGER
+
+## 16-05-2017 (Tuesday, week 7)
+# DAGGER
+Collected some training data from the simulator for DAGGER: 4 expert runs of the red square task and prepared them for tensorflow.
+
+## 17-05-2017 (Wednesday, week 7)
+# DAGGER
+Tensorflow last-layer retraining is used to create a usable model for dagger. Tensorflow requires at least 20 examples per class, so some classes (LAND, TAKEOFF, LEFT, RIGHT and BACKWARD) have been temporarily removed for the test. After 1000 training steps a train accuracy of ~92%, a validation accuracy of ~80% and a final test accuracy of 72.9% is achieved. On CPU, training time is 2 minutes, not including the time needed to run the training images through the net (~2 img/s). This is with the images in their raw 640x360 resolution.
+
+This image testing time might pose a problem, since a rate of 2hz is quite low. Using a GPU would improve this, but the GPU drivers don't work. Instead, the images might be able to be scaled down further.
+
 
