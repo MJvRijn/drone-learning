@@ -113,7 +113,7 @@ The actions from the python layer are now passed to the simulator. They reveal t
 * The hover action is very unstable, with the drone swerving around trying to balance itself.
 
 ## 08-05-2017 (Monday, week 6)
-## Simulator
+### Simulator
 The following action space is now available in the simulator:
 * Forward
 * Backward
@@ -125,11 +125,11 @@ The following action space is now available in the simulator:
 * Anticlockwise (yaw)
 
 ## 09-05-2017 (Tuesday, week 6)
-## Simulator
+### Simulator
 The simulator now allows for the recording and playback of training data (command (action) and image (state))
 
 ## 11-05-2017 (Thursday, week 6)
-# General
+### General
 Meeting with supervisor. The progress with the simulator has been discussed.
 
 Next meeting: 17-05-2017
@@ -139,13 +139,46 @@ Objectives:
 * Use it to implement DAGGER
 
 ## 16-05-2017 (Tuesday, week 7)
-# DAGGER
+### DAGGER
 Collected some training data from the simulator for DAGGER: 4 expert runs of the red square task and prepared them for tensorflow.
 
 ## 17-05-2017 (Wednesday, week 7)
-# DAGGER
+### DAGGER
 Tensorflow last-layer retraining is used to create a usable model for dagger. Tensorflow requires at least 20 examples per class, so some classes (LAND, TAKEOFF, LEFT, RIGHT and BACKWARD) have been temporarily removed for the test. After 1000 training steps a train accuracy of ~92%, a validation accuracy of ~80% and a final test accuracy of 72.9% is achieved. On CPU, training time is 2 minutes, not including the time needed to run the training images through the net (~2 img/s). This is with the images in their raw 640x360 resolution.
 
 This image testing time might pose a problem, since a rate of 2hz is quite low. Using a GPU would improve this, but the GPU drivers don't work. Instead, the images might be able to be scaled down further.
+
+### General
+I met with my supervisor. We discussed the following topics:
+* What kind of (convolutional) neural network to use
+* How to collect enough data for training/how to efficiently label data with DAGGER
+* We decided to simplify the action space further (at least initially), leaving FORWARD, BACKWARD, LEFT, RIGHT, and possibly LAND
+* Complications with GPUs
+
+Tom kindly offered to provide a tensorflow implementation of a neural network used by (Mnih 2013/2015) to perform deep reinforcement learning on ATARI games.
+
+## 18-05-2017 (Thursday, week 7)
+### General
+In order to create an environment which is both able to run the simulator and has a powerful GPU, an attempt is made to install ubuntu 14.04 on my home pc. There is no spare hard drive space, so the installation is made one a 32GB USB drive, but booting from here is not successful.
+
+I received the neural network implementation, but due to the complications above am not able to run it yet
+
+## 19-05-2017 (Friday, week 7)
+### Literature
+Collected:
+Mnih 2013 - Playing atari with deep reinforcement learning
+Mnih 2015 - Human-level control through deep reinforcement learning
+
+Updated the literature review to include a passage about deep-q learning, and the need for large data sets. Also rewrote some parts in better academic English for the academic English assignment.
+
+## 20-05-2017 (Saturday, week 7)
+### Learning
+Today I'm not at home, so I only have my laptop. I hadn't tried to install tensorflow with GPU support ebcause I couldn't get the Nvidia driver running, but it turns out that it works fine for CUDA. I installed tensorflow-gpu, and tried to train the convnet. Unfortunately 2GB of video memory does not appear to be enough to train at 84x84x4, or indeed any size at all. Hopefully it is sufficient to use a trained model.
+
+## 21-05-2017 (Sunday, week 7)
+### Learning
+After returning home I have quickly been able to install CUDA and cuDNN on my windows machine, with a 4GB GTX970. I am able to run the training at 82% max video memory (3.28GB), but this is still not enough for training at 84x84x4. After some testing I have found I can train at 56x56x1. 
+
+
 
 
