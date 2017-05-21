@@ -177,7 +177,7 @@ Today I'm not at home, so I only have my laptop. I hadn't tried to install tenso
 
 ## 21-05-2017 (Sunday, week 7)
 ### Learning
-After returning home I have quickly been able to install CUDA and cuDNN on my windows machine, with a 4GB GTX970. I am able to run the training at 82% max video memory (3.28GB), but this is still not enough for training at 84x84x4. After some testing I have found I can train at 56x56x1. 
+After returning home I have quickly been able to install CUDA and cuDNN on my windows machine, with a 4GB GTX970. I am able to run the training at 80% max video memory (3.2GB), but this is still not enough for training at 84x84x4. After some testing I have found I can train at 56x56x4 (680 examples/s). 
 
 
 
