@@ -179,6 +179,36 @@ Today I'm not at home, so I only have my laptop. I hadn't tried to install tenso
 ### Learning
 After returning home I have quickly been able to install CUDA and cuDNN on my windows machine, with a 4GB GTX970. I am able to run the training at 80% max video memory (3.2GB), but this is still not enough for training at 84x84x4. After some testing I have found I can train at 56x56x4 (680 examples/s). 
 
+## 22-05-2017 (Monday, week 8)
+### General
+Meeting with supervisor. We discussed the technical issues surrounding video memory. To train the convolutional neural network I would need an account on the Titan X machine. We also noted that a lot of time has been spent solving technical issues and not much time has been spent on deep learning. 
+
+Objectives:
+* Use a feed-forward network to finish the simulator interaction
+* Collect a lot of training examples using the reduces action space
+* Investigate Titan X machine
+
+## 24-05-2017 (Wednesday, week 8)
+### Learning
+Successfully set up tensorflow on the Titan X machine and trained the CNN. Using the settings from Mnih's paper requires about 9GB of video memory. 
+
+## 25-05-2017 (Thursday, week 8)
+### Learning
+To implement the feed-forward neural network I though it would be possible to remove the convolution layers from the convolutional network and replace them with fully connected ones. Unfortunately this results in vague InvalidArgumentErrors, even if the input data is the same shape as the output data.
+
+## 26-05-2017 (Friday, week 8)
+### Learning
+To be able to continue on this weeks objectives despite not being able to easily implement the feed-forward network. I decided to use the convolutional network, and perform the training on the server. This required some server communication and data transfer to be set up, but this (thankfully) did not present too many problems.
+
+## 26-05-2017 (Saturday, week 8)
+### Learning
+Today I modified the training code to save a model. To my surprise the model is over 2.6GB! This makes the transfer of the model I had envisioned for the dagger algorithm rather problematic. To classify an image, the model needs to be loaded into the video memory, requiring almost as much data as for training. This means the convolutional network cannot be run on the same system as the simulator, which is potentially a huge problem. The feedforward network is meant for testing, and is unlikely to produce satisfactory results. The only way around this in tensorflow seems to be to run the classification on the Titan X machine.
+
+For the time being this means that a working feed-forward network is needed to continue. I will discuss these problems with my supervisor.
+
+
+
+
 
 
 
