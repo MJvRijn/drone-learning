@@ -1,0 +1,2 @@
+class SettingsException(Exception):
+	pass
