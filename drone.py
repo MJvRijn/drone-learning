@@ -3,6 +3,7 @@ import argparse, rospy
 from utils.settings import SettingsManager
 from utils.helpers import Log
 from utils.ros import Publisher
+from utils.record import Trajectory
 
 # Parse Arguments
 parser = argparse.ArgumentParser()
@@ -28,11 +29,17 @@ settings = SettingsManager()
 output = Log(settings)
 publisher = Publisher(settings)
 
-# Initialise controller
+# Initialise controller and recording
 if manual or record:
 	controller = settings.get_manual_controller()
-elif play: #TODO
-	pass
+
+	if record:
+		recording = Trajectory(args.record, settings)
+
+elif play:
+	controller = Trajectory(args.play, settings)
+	controller.read()
+
 elif interactive: #TODO
 	pass
 
@@ -59,11 +66,19 @@ while not rospy.is_shutdown():
 		airborne = False
 		publisher.publish_stop()
 
+		# Finalise recprding
+		if record: 
+			recording.write()
+			break
+
 	elif airborne:
 		if action == 'START': action = 'HOVER'
 
 		output.logi('Performing action: ' + action)
 		publisher.publish_move(action)
+
+		if record:
+			recording.record(action)
 
 	# Sleep
 	rate.sleep()

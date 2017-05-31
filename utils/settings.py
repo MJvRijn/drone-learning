@@ -52,5 +52,11 @@ class SettingsManager(object):
                self._ros_land_channel, \
                self._ros_movement_channel
 
+    def get_ros_camera_channel(self):
+        return self._ros_camera_channel
+
     def get_actions(self):
         return self._actions
+
+    def get_recordings_dir(self):
+        return self._dir_recordings
