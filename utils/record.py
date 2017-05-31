@@ -1,3 +1,7 @@
+from __future__ import division
+from __future__ import absolute_import
+from __future__ import print_function
+
 import os, cv2, rospy
 
 from sensor_msgs.msg import Image
@@ -34,10 +38,9 @@ class Trajectory(object):
         # Write images
         bridge = CvBridge()
 
-        for image in self._images:
-            print(image)
-            # cv2_img = bridge.imgmsg_to_cv2(image, 'bgr8')
-            # cv2.imwrite('{}{}.jpg'.format(images_path, self._index), cv2_img)
+        for i in range(len(self._images)):
+            cv2_img = bridge.imgmsg_to_cv2(self._images[i], 'bgr8')
+            cv2.imwrite('{}{}.jpg'.format(images_path, i), cv2_img)
 
     def read(self):
         actions_path = '{}/{}/actions.txt'.format(self._settings.get_recordings_dir(), self._name)
