@@ -200,11 +200,31 @@ To implement the feed-forward neural network I though it would be possible to re
 ### Learning
 To be able to continue on this weeks objectives despite not being able to easily implement the feed-forward network. I decided to use the convolutional network, and perform the training on the server. This required some server communication and data transfer to be set up, but this (thankfully) did not present too many problems.
 
-## 26-05-2017 (Saturday, week 8)
+## 27-05-2017 (Saturday, week 8)
 ### Learning
 Today I modified the training code to save a model. To my surprise the model is over 2.6GB! This makes the transfer of the model I had envisioned for the dagger algorithm rather problematic. To classify an image, the model needs to be loaded into the video memory, requiring almost as much data as for training. This means the convolutional network cannot be run on the same system as the simulator, which is potentially a huge problem. The feedforward network is meant for testing, and is unlikely to produce satisfactory results. The only way around this in tensorflow seems to be to run the classification on the Titan X machine.
 
 For the time being this means that a working feed-forward network is needed to continue. I will discuss these problems with my supervisor.
+
+## 29-05-2017 (Monday, week 9)
+### General
+Meeting with supervisor.
+
+## 30-05-2017 (Tuesday, week 9)
+
+## 31-05-2017 (Wednesday, week 9)
+### Progress Presentation
+
+## 01-06-2017 (Thursday, week 9)
+### Progress Presentation
+
+## 02-06-2017 (Friday, week 9)
+### Progress Presentation
+
+## 03-06-2017 (Saturday, week 9)
+### Learning
+
+
 
 
 

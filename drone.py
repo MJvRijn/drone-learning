@@ -9,6 +9,7 @@ from utils.settings import SettingsManager
 from utils.helpers import Log
 from utils.ros import Publisher
 from utils.record import Trajectory
+from utils.control import ModelController, KeyboardController
 
 # Parse Arguments
 parser = argparse.ArgumentParser()
@@ -45,8 +46,9 @@ elif play:
 	controller = Trajectory(args.play, settings)
 	controller.read()
 
-elif interactive: #TODO
-	pass
+elif interactive: 
+	keyboard = KeyboardController(settings)
+	controller = ModelController(settings)
 
 
 # Control loop
@@ -56,6 +58,12 @@ airborne = False
 
 while not rospy.is_shutdown():
 	action = controller.get_action()
+
+	# Override start and stop from keyboard
+	if interactive:
+		kba = keyboard.get_action()
+		if kba == 'START' or kba == 'STOP':
+			action = kba
 
 	if action == None:
 		output.logi('No more actions available')

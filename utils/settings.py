@@ -33,6 +33,9 @@ class SettingsManager(object):
                 'CLOCKWISE':        ([0.0, 0.0, 0.0], [0.0, 0.0,-1.0]),
                 'FORWARD':          ([1.0, 0.0, 0.0], [0.0, 0.0, 0.0])}
 
+    # Model settings
+    _model_name = 'random'
+
 
     def __init__(self):
         self.read()
@@ -47,7 +50,7 @@ class SettingsManager(object):
             raise SettingsException('controller type must be keyboard')
 
     def get_rate(self):
-        if self._ros_rate in range(1, 60):
+        if self._ros_rate in range(1, 61):
             return self._ros_rate
         else:
             raise SettingsException('rate must be between 1 and 60hz')
@@ -65,3 +68,6 @@ class SettingsManager(object):
 
     def get_recordings_dir(self):
         return self._dir_recordings
+
+    def get_model_name(self):
+        return self._model_name
