@@ -24,28 +24,52 @@ class ServerManager(object):
         filename = self.transfer_image(image)
 
         # Wait for classification result
-        
-        # _, stdout, stderr = self._ssh.exec_command('source ~/imitation/bin/activate; python drone/classify.py {}'.format(filename))
-        
-        # for line in stderr.readlines():
-        #     print(line)
+        while True:
+            _, stdout, stderr = self._ssh.exec_command('cat ~/drone/classify/{}.txt'.format(filename))
 
-        # return stdout.readlines()[0].strip('\n')
-        return 'HOVER'
+            result = stdout.readlines()
 
-    def transfer_image(self, image):
+            print(result)
+
+            if result:
+                return result[0]
+
+            time.sleep(0.05)
+
+    def classify_image(self, image):
         filename = ''.join([random.choice(string.ascii_uppercase) for _ in range(20)])
         local_file = '/tmp/{}.jpg'.format(filename)
         remote_file = '/home/{}/drone/classify/{}.jpg'.format(self._settings.get_server_details()[1], filename)
 
         cv2.imwrite(local_file, image)
+
+        # Transfer file
         sftp = self._ssh.open_sftp()
 
-        sftp.put(local_file, remote_file)
+        while True:
+            try:
+                sftp.put(local_file, remote_file)
+            except IOError:
+                time.sleep(0.01)
+            else:
+                break
+
+        # Wait for classification
+        while True:
+            try:
+                sftp.stat(remote_file.split('.')[0] + '.txt')
+            except IOError:
+                time.sleep(0.02)
+            else:
+                _, stdout, stderr = self._ssh.exec_command('cat ~/drone/classify/{}.txt'.format(filename))
+
+                result = stdout.readlines()
+                action = result[0]
+                break
 
         os.remove(local_file)
 
-        return filename
+        return action
 
     def connect(self):
         ssh = paramiko.SSHClient()
