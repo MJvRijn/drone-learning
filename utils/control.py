@@ -58,7 +58,7 @@ class ModelController(object):
 
     def convert_image(self):
         bridge = CvBridge()
-        return np.asarray(bridge.imgmsg_to_cv2(self._latest_image, 'bgr8'))
+        return bridge.imgmsg_to_cv2(self._latest_image, 'bgr8')
 
     def random_model(self):
         return ['HOVER', 'FORWARD', 'CLOCKWISE', 'ANTICLOCKWISE'][random.randint(0,3)]
