@@ -48,7 +48,7 @@ elif play:
 
 elif interactive: 
 	keyboard = KeyboardController(settings)
-	controller = ModelController(settings)
+	controller = ModelController(settings, output)
 
 
 # Control loop

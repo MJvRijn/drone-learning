@@ -6,6 +6,8 @@ from __future__ import unicode_literals
 from .errors import SettingsException
 from .control import KeyboardController
 
+import os, shutil, json
+
 class SettingsManager(object):
 
     # ROS settings
@@ -17,15 +19,16 @@ class SettingsManager(object):
 
     # Directory settings
     _dir_recordings = 'recordings'
-    _dir_training_sets = 'training'
-    _dir_models = 'models'
+    _dir_remote_training_sets = 'train'
+    _dir_remote_classification = 'classify'
 
     # Control settings
     _controller = 'keyboard'
 
     # Server settings
     _server_address = '127.0.0.1'
-    _server_api = '/image'
+    _server_username = 'bob'
+    _server_password = 'bob'
 
     # Action space
     _actions = {'HOVER':            ([0.0, 0.0, 0.0], [0.0, 0.0, 0.0]),
@@ -34,14 +37,26 @@ class SettingsManager(object):
                 'FORWARD':          ([1.0, 0.0, 0.0], [0.0, 0.0, 0.0])}
 
     # Model settings
-    _model_name = 'random'
+    _model_name = 'remote'
+    _model_remote_name = 'ff' # ff, cnn
 
 
     def __init__(self):
         self.read()
 
     def read(self):
-        pass
+        if not os.path.isfile('settings.json'):
+            shutil.copyfile('settings.example.json', 'settings.json')
+
+        with open('settings.json') as data:
+            s = json.load(data)
+
+            self._server_address = s['server_address']
+            self._server_username = s['server_username']
+            self._server_password = s['server_password']
+
+    def get_server_details(self):
+        return self._server_address, self._server_username, self._server_password
 
     def get_manual_controller(self):
         if self._controller == 'keyboard':
