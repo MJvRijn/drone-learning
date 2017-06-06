@@ -3,3 +3,4 @@
 /recordings
 /training
 *.pyc
+settings.json

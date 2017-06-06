@@ -208,9 +208,11 @@ For the time being this means that a working feed-forward network is needed to c
 
 ## 29-05-2017 (Monday, week 9)
 ### General
-Meeting with supervisor.
+Academic English
 
 ## 30-05-2017 (Tuesday, week 9)
+### General
+Meeting with supervisor.
 
 ## 31-05-2017 (Wednesday, week 9)
 ### Progress Presentation
