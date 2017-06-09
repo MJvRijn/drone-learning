@@ -73,6 +73,9 @@ while not rospy.is_shutdown():
 		output.logi('Starting trajectory')
 		airborne = True
 		publisher.publish_start()
+
+		if record:
+			recording.start_new()
 		
 	elif action == 'STOP' and airborne:
 		output.logi('Stopping trajectory')
@@ -82,7 +85,6 @@ while not rospy.is_shutdown():
 		# Finalise recprding
 		if record: 
 			recording.write()
-			break
 
 	elif airborne:
 		if action == 'START': action = 'HOVER'

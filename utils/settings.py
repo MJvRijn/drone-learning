@@ -64,6 +64,9 @@ class SettingsManager(object):
         else:
             raise SettingsException('controller type must be keyboard')
 
+    def get_recordings_directory(self):
+        return self._dir_recordings
+
     def get_rate(self):
         if self._ros_rate in range(1, 61):
             return self._ros_rate

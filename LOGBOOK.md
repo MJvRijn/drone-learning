@@ -208,24 +208,64 @@ For the time being this means that a working feed-forward network is needed to c
 
 ## 29-05-2017 (Monday, week 9)
 ### General
-Academic English
+By the morning my frustrations had died down somewhat, which gave me the opportunity to come up with some solutions. For one, I realised that the ROS integration did not have to run as a node. This allows me to integrate all the (local) code into one system, which I have started doing. I also discovered that the reason the simulator was not working was graphics driver related. Basically, it is not possible to run tensorflow on GPU and run the simulator at the same time on my system. It is therefore probably best to perform the learning and classification remotely.
 
 ## 30-05-2017 (Tuesday, week 9)
 ### General
-Meeting with supervisor.
+Meeting with supervisor. We discussed the difficulties experienced with the learning system. The decision was made to perform all learning and classifying on the remote server. This resolved issues with CUDA, graphics drivers and a lack of video memory. The next immediate target is having a feed-forward neural network running on the server which is able to train and classify on demand. 
+
+We also discussed the use of the real drone, and concluded that it would introduce too many new technical issued. The plan is now to dedicate one day to the real drone to see if anything can be done with it.
+
+Next meeting: friday, after presentation.
 
 ## 31-05-2017 (Wednesday, week 9)
 ### Progress Presentation
+I devised the plan for the rest of the project. As I noted yesterday, the amount of time allocated to the real drone has been reduced significantly. This means the answer to the research question mighht have to be presented differently.
 
 ## 01-06-2017 (Thursday, week 9)
 ### Progress Presentation
+I completed the progress presentation slides and received feedback on the from my supervisor.
 
 ## 02-06-2017 (Friday, week 9)
 ### Progress Presentation
+For obvious reasons, my progress presentation was centred around the planning more than actual results. The reaction to the contents of the presentation seemed positive, and has not lead to any changes to the plan.
 
 ## 03-06-2017 (Saturday, week 9)
 ### Learning
+Finished migrating all code to the new system. All previously working functions are now available and have been improved.
 
+## 04-06-2017 (Sunday, week 9)
+### Learning
+Implemented the server communications, allowing the system to pass images from the simulator to the server for classification (currently random). Also added uploading of training data. Reduced the number of steps neccessary to record a trajectory, allowing for faster collection of trajectories. Collected 25 demonstrations of the task, known as dataset A.
+
+## 05-06-2017 (Monday, week 10)
+### General
+Today I wrote a draft introduction to submit for the assignment on academic English.
+
+## 06-06-2017 (Tuesday, week 10)
+### Learning
+Implemented a feedforward neural network using Keras, which simplifies the process significantly. Trained it on dataset A. No immediate results, need to look at parameters.
+
+## 07-06-2017 (Wednesday, week 10)
+### General
+Meeting with supervisor. Showed progress. We discussed the aims for the remainder of the project:
+* Experiment with feedforward NN
+* Experiment with different NN
+* Experiment with DAGGER (build DAGGER interface)
+* Experiment with changing environment (moving houses, etc)
+* Experiment with changing goal (moving red square)
+* Experiment with different amounts of trajectories in the training set
+* Do as many possible experiments in the current learning environment.
+
+Immediate objectives:
+* Visualise the representation of the image as input to the neural network to see if the correct information is visible.
+
+There will be no introductions of new algorithms, such as inverse reinforcement learning. Testing on the drone is also unlikely to happen due to time constraints.
+
+From now on, some of the time every week will be dedicated to the thesis. This was our last meeting before the end of the project.
+
+### Learning
+During the meeting we tried changing parameters, but to no avail. Will look at this tomorrow.
 
 
 

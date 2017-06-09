@@ -2,13 +2,14 @@ from __future__ import division
 from __future__ import absolute_import
 from __future__ import print_function
 
-import os, cv2, rospy
+import os, cv2, rospy, random, string
 
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
 class Trajectory(object):
     _index = 0
+    _id = 'AAAAA'
     _latest_image = None
     _actions = []
     _images = []
@@ -23,9 +24,15 @@ class Trajectory(object):
         self._images.append(self._latest_image)
         self._index += 1
 
+    def start_new(self):
+        self._index = 0
+        self._id = ''.join([random.choice(string.ascii_uppercase) for _ in range(5)])
+        self._actions = []
+        self._images = []
+
     def write(self):
-        actions_path = '{}/{}/actions.txt'.format(self._settings.get_recordings_dir(), self._name)
-        images_path = '{}/{}/images/'.format(self._settings.get_recordings_dir(), self._name)
+        actions_path = '{}/{}/{}.txt'.format(self._settings.get_recordings_dir(), self._name, self._id)
+        images_path = '{}/{}/{}/'.format(self._settings.get_recordings_dir(), self._name, self._id)
 
         # Create recording directories
         if not os.path.exists(images_path):
@@ -42,12 +49,16 @@ class Trajectory(object):
             cv2_img = bridge.imgmsg_to_cv2(self._images[i], 'bgr8')
             cv2.imwrite('{}{}.jpg'.format(images_path, i), cv2_img)
 
-    def read(self):
-        actions_path = '{}/{}/actions.txt'.format(self._settings.get_recordings_dir(), self._name)
+        print(self._id)
 
-        with open(actions_path, 'r') as f:
-            self._actions = f.read().split('\n')[:-1]
-            self._index = 0
+    def read(self):
+        # actions_path = '{}/{}/actions.txt'.format(self._settings.get_recordings_dir(), self._name)
+
+        # with open(actions_path, 'r') as f:
+        #     self._actions = f.read().split('\n')[:-1]
+        #     self._index = 0
+
+        print('Trajectory playback currently unavailable')
 
     def get_action():
         if self._index < len(self._actions):

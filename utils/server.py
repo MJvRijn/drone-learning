@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import paramiko, string, random, time, cv2, os
+import paramiko, string, random, time, cv2, os, tarfile
 
 import numpy as np
 
@@ -16,8 +16,24 @@ class ServerManager(object):
         self._log = log
         self._ssh = self.connect()
 
-    def train_model(self, model_name):
-        pass
+    def train_model(self, model_name, dataset):
+        directory = '{}/{}'.format(self._settings.get_recordings_directory(), dataset)
+        archive = '{}.tar.gz'.format(directory)
+
+        with tarfile.open(archive, 'w:gz') as tar:
+            tar.add(directory, arcname=os.path.basename(directory))
+        
+        # Transfer file
+        sftp = self._ssh.open_sftp()
+        remote_file = '/home/{}/drone/train/{}.tar.gz'.format(self._settings.get_server_details()[1], dataset)
+
+        sftp.put(archive, remote_file)
+
+        # Wait for file to arrive
+
+        # Start training
+
+        # Wait for training to complete
 
     def classify_image(self, image):
         # Transfer File
