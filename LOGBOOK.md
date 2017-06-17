@@ -273,7 +273,7 @@ Hooked up model to server, improved speed.
 
 ## 11-06-2017 (Sunday, week 10)
 ### FF network
-![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example.png)
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example.jpg)
 
 ## 12-06-2017 (Monday, week 11)
 ## General
@@ -293,7 +293,7 @@ Observation: Input image is triple channel, contains excess information
 
 Tried: reducing image to greyscale while preserving standout colour (red) by setting areas where red > 250 and green/blue < 25 to max, while dividing rest (from red channel) by three.
 
-![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_standout.png)
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example_standout.jpg)
 
 Potential caveat: distinction between walls and background reduced
 
