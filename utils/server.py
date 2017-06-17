@@ -15,6 +15,8 @@ class ServerManager(object):
         self._settings = settings
         self._log = log
         self._ssh = self.connect()
+        self._sftp = self._ssh.open_sftp()
+        self._transferring = False
 
     def train_model(self, model_name, dataset):
         directory = '{}/{}'.format(self._settings.get_recordings_directory(), dataset)
@@ -24,10 +26,9 @@ class ServerManager(object):
             tar.add(directory, arcname=os.path.basename(directory))
         
         # Transfer file
-        sftp = self._ssh.open_sftp()
         remote_file = '/home/{}/drone/train/{}.tar.gz'.format(self._settings.get_server_details()[1], dataset)
 
-        sftp.put(archive, remote_file)
+        self._sftp.put(archive, remote_file)
 
         # Wait for file to arrive
 
@@ -35,47 +36,54 @@ class ServerManager(object):
 
         # Wait for training to complete
 
-    def classify_image(self, image):
-        # Transfer File
-        filename = self.transfer_image(image)
+    # def classify_image(self, image):
+    #     # Transfer File
+    #     filename = self.transfer_image(image)
 
-        # Wait for classification result
-        while True:
-            _, stdout, stderr = self._ssh.exec_command('cat ~/drone/classify/{}.txt'.format(filename))
+    #     # Wait for classification result
+    #     while True:
+    #         _, stdout, stderr = self._ssh.exec_command('cat ~/drone/classify/{}.txt'.format(filename))
 
-            result = stdout.readlines()
+    #         result = stdout.readlines()
 
-            print(result)
+    #         print(result)
 
-            if result:
-                return result[0]
+    #         if result:
+    #             return result[0]
 
-            time.sleep(0.05)
+    #         time.sleep(0.05)
 
     def classify_image(self, image):
         filename = ''.join([random.choice(string.ascii_uppercase) for _ in range(20)])
         local_file = '/tmp/{}.jpg'.format(filename)
-        remote_file = '/home/{}/drone/classify/{}.jpg'.format(self._settings.get_server_details()[1], filename)
+        remote_file = '/home/{}/drone/transfer/{}.jpg'.format(self._settings.get_server_details()[1], filename)
 
         cv2.imwrite(local_file, image)
 
         # Transfer file
-        sftp = self._ssh.open_sftp()
-
         while True:
             try:
-                sftp.put(local_file, remote_file)
-            except IOError:
+                self._transferring = True
+                self._sftp.put(local_file, remote_file, callback=self.img_callback)
+            except IOError as e:
+                self._transferring = False
                 time.sleep(0.01)
             else:
+                
                 break
+
+        # Wait for file to arrive and move it
+        while self._transferring:
+            time.sleep(0.001)
+
+        self._ssh.exec_command('mv -v ~/drone/transfer/* ~/drone/classify/')
 
         # Wait for classification
         while True:
             try:
-                sftp.stat(remote_file.split('.')[0] + '.txt')
+                self._sftp.stat('/home/{}/drone/classify/{}.txt'.format(self._settings.get_server_details()[1], filename))
             except IOError:
-                time.sleep(0.02)
+                time.sleep(0.01)
             else:
                 _, stdout, stderr = self._ssh.exec_command('cat ~/drone/classify/{}.txt'.format(filename))
 
@@ -86,6 +94,10 @@ class ServerManager(object):
         os.remove(local_file)
 
         return action
+
+    def img_callback(self, current, total):
+        if current == total:
+            self._transferring = False
 
     def connect(self):
         ssh = paramiko.SSHClient()

@@ -267,6 +267,74 @@ From now on, some of the time every week will be dedicated to the thesis. This w
 ### Learning
 During the meeting we tried changing parameters, but to no avail. Will look at this tomorrow.
 
+## 09-06-2017 (Friday, week 10)
+## Learning
+Hooked up model to server, improved speed.
+
+## 11-06-2017 (Sunday, week 10)
+### FF network
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example.png)
+
+## 12-06-2017 (Monday, week 11)
+## General
+Uvavpn down, so decided to start thesis. Created a basic layout etc.
+
+## 15-06-2017 (Thursday, week 11)
+## FF network
+Network params:
+ - FC 512
+ - Dropout 0.3
+ - FC 256
+ - rmsprop (lr=0.0001)
+
+Problem: Accuracy low (0.2419)
+
+Observation: Input image is triple channel, contains excess information
+
+Tried: reducing image to greyscale while preserving standout colour (red) by setting areas where red > 250 and green/blue < 25 to max, while dividing rest (from red channel) by three.
+
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_standout.png)
+
+Potential caveat: distinction between walls and background reduced
+
+Result: Accuracy significantly improved (0.62 after 10 epochs, 0.67 after 25)
+
+Observation: unneccesary action 'HOVER' included. This is never a desirable action for the drone to take.
+
+Tried: removing 'hover' from training data and possible actions
+
+Result: Accuracy significantly improved (0.75 after 10 epochs, 0.79 after 25)
+
+Potential caveat: this may be because of an unbalanced training set, and the network just learning to predict the most common.
+
+Tried: counting examples of each type in training set
+
+Result: 
+Forward (1488), Clockwise (291), Anticlockwise (271)
+Forward = 72.7%
+
+So the hypothesis is potentially correct
+
+Tried: evaluating test accuracy
+Result: test accuracy quickly rises to ~82%, but does not progress after that. Occasional epochs show very low accuracy
+
+Tried: balancing training set so that forward == clockwise+anticlockwise (~500)
+Result: test accuracy = 0.4067, does not change between epochs, after epoch 12 suddenly increases
+
+Tried: running unbalanced model in simulator
+Result: success! The drone clearly displays some of the desired behaviour. It is of course not perfect, but the drone flies forward when there is a large red square in sight and turns circles most of the time if there is not (mostly anticlockwise).
+
+Observation: the drone loves windows alsmost as much as the red square, must check to see how these are represented.
+
+## 16-06-2017 (Friday, week 11)
+## Thesis
+Worked on method & approach
+
+
+
+
+
+
 
 
 
