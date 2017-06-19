@@ -370,6 +370,11 @@ Changed the image processing code to fix the window dots:
 Make sure the red square is still right:
 ![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example_standout_new.jpg)
 
+### DAGGER
+[PDF](http://rll.berkeley.edu/deeprlcourse-fa15/docs/2015.10.5.dagger.pdf) here shows dagger working using steering inputs as mistakes are made, similar to my earlier dagger idea. (Let drone fly and correct with keyboard when mistake made)
+
+Started implementation
+Finished basic implementation
 
 
 

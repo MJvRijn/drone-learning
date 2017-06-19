@@ -18,9 +18,10 @@ group.add_argument('-r', '--record', type=str, metavar='NAME', help='record a tr
 group.add_argument('-p', '--play', type=str, metavar='NAME', help='play a recorded trajectory')
 group.add_argument('-m', '--manual', action='store_true', help='control the drone manually')
 group.add_argument('-i', '--interactive', action='store_true', help='get actions from server')
+group.add_argument('-d', '--dagger', type=str, metavar='NAME', help='collect data with DAGGER')
 args = parser.parse_args()
 
-record = play = manual = interactive = False
+record = play = manual = interactive =dagger = False
 if args.record:
 	record = True
 if args.play:
@@ -29,6 +30,8 @@ if args.manual:
 	manual = True
 if args.interactive:
 	interactive = True
+if args.dagger:
+	dagger = True
 
 # Load settings and logger
 settings = SettingsManager()
@@ -46,10 +49,12 @@ elif play:
 	controller = Trajectory(args.play, settings)
 	controller.read()
 
-elif interactive: 
+elif interactive or dagger: 
 	keyboard = KeyboardController(settings)
 	controller = ModelController(settings, output)
 
+	if dagger:
+		recording = Trajectory(args.dagger, settings)
 
 # Control loop
 rospy.init_node('control', anonymous=True)
@@ -65,6 +70,13 @@ while not rospy.is_shutdown():
 		if kba == 'START' or kba == 'STOP':
 			action = kba
 
+	if dagger:
+		kba = keyboard.get_action()
+		override = False
+		if kba != 'HOVER':
+			action = kba
+			override = True
+
 	if action == None:
 		output.logi('No more actions available')
 		break
@@ -74,7 +86,7 @@ while not rospy.is_shutdown():
 		airborne = True
 		publisher.publish_start()
 
-		if record:
+		if record or dagger:
 			recording.start_new()
 		
 	elif action == 'STOP' and airborne:
@@ -83,7 +95,7 @@ while not rospy.is_shutdown():
 		publisher.publish_stop()
 
 		# Finalise recprding
-		if record: 
+		if record or dagger: 
 			recording.write()
 
 	elif airborne:
@@ -92,7 +104,7 @@ while not rospy.is_shutdown():
 		output.logi('Performing action: ' + action)
 		publisher.publish_move(action)
 
-		if record:
+		if record or (dagger and override):
 			recording.record(action)
 
 	# Sleep
