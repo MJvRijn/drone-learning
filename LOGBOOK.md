@@ -273,14 +273,14 @@ Hooked up model to server, improved speed.
 
 ## 11-06-2017 (Sunday, week 10)
 ### FF network
-![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example.png)
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example.jpg)
 
 ## 12-06-2017 (Monday, week 11)
-## General
+### General
 Uvavpn down, so decided to start thesis. Created a basic layout etc.
 
 ## 15-06-2017 (Thursday, week 11)
-## FF network
+### FF network
 Network params:
  - FC 512
  - Dropout 0.3
@@ -293,7 +293,7 @@ Observation: Input image is triple channel, contains excess information
 
 Tried: reducing image to greyscale while preserving standout colour (red) by setting areas where red > 250 and green/blue < 25 to max, while dividing rest (from red channel) by three.
 
-![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_standout.png)
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example_standout.jpg)
 
 Potential caveat: distinction between walls and background reduced
 
@@ -327,8 +327,48 @@ Result: success! The drone clearly displays some of the desired behaviour. It is
 Observation: the drone loves windows alsmost as much as the red square, must check to see how these are represented.
 
 ## 16-06-2017 (Friday, week 11)
-## Thesis
+### Thesis
 Worked on method & approach
+
+## 19-06-2017 (Monday, week 12)
+### FF network
+Parameter testing (100 epochs, 90/10 train/test, ~2000 examples/25 trajectories):
+D512/DR0.3/D256 lr 0.0001 ba 32 im 64: tr 0.8461 te: 0.8098
+D512/DR0.3/D256 lr 0.0001 ba 32 im 32: tr 0.8531 te: 0.8146
+D512/DR0.3/D256 lr 0.00001 ba 32 im 64: tr 0.8623 te: 0.7854 (accuracy more stable)
+D1024/DR0.3/D128 lr 0.00001 ba 32 im 64: tr 0.8634 te: 0.8341
+D1024/DR0.5/D128 lr 0.00001 ba 32 im 64: tr 0.8585 te: 0.8146
+D1024/DR0.3/D128 lr 0.00001 ba 16 im 64: tr 0.8986 te: 0.8000
+D1024/DR0.3/D128/DR0.3/D64/DR0.3 lr 0.00005 ba 32 im 64: tr 0.8260 te: 0.7951
+D16 lr 0.00005 ba 32 im 64: tr 0.8575 te: 0.8293
+D16 lr 0.005 ba 32 im 64: no learning
+D16 lr 0.0005 ba 32 im 64: tr 0.8108 te: 0.8000 (unstable)
+D512/DR0.5 lr 0.0005 ba 32 im 64: no learning
+D512/DR0.5 lr 0.0001 ba 32 im 64: tr 0.8434 te 0.7854
+D512/DR0.5 lr 0.0001 ba 32 im 64 (balanced/less data): tr 0.7497 te 0.7075
+D25000/DR0.2 lr 0.0001 ba 32 im 64 (balanced/less data): no learning
+D2048/DR0.2 lr 0.0001 ba 32 im 64 (balanced/less data): no learning
+D1024/DR0.3/D128/DR0.3 lr 0.00001 ba 32 im 64 (balanced/less data): tr 0.8000 te: 0.6321
+D1024/DR0.3/D128/DR0.3 lr 0.00001 ba 32 im 64: tr 0.8493 te: 0.8732
+
+Conclusion: the differences between vastly different networks are relatively small
+
+Previous observation: the drone likes windows
+Tried: looking at representation of window
+
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/window_image.png)
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/window_image_standout.png)
+
+There are clearly some white dots in the window, which may be the cuase of the drone's interest in it.
+
+Drone behaviour test using last tested model:
+The drone is now more likely to fly forward, even if the red square is more visible. This makes it more likely to find the red square, but also causes more crashes. When the red square is right infront of the drone, the desire to fly forward is far more pronounced.
+
+Changed the image processing code to fix the window dots:
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/window_image_standout_new.png)
+
+Make sure the red square is still right:
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/input_example_standout_new.jpg)
 
 
 

@@ -9,7 +9,7 @@ im = cv2.resize(im, (64, 64))
 blue, green, red = cv2.split(im)
 
 red /= 3
-mask = (red > 250).astype(int) + (blue < 25).astype(int) + (green < 25).astype(int)
+mask = (red > 250).astype(int) + (blue < 10).astype(int) + (green < 10).astype(int)
 red[mask != 0] = 255
 
 cv2.imwrite(dest_path, red)
