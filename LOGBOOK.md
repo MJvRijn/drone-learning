@@ -407,3 +407,112 @@ Testing different number of trajectories (accuracy, loss, confusion matrix):
 23. 1606/1606 [==============================] - 0s - loss: 0.3567 - acc: 0.8630 - val_loss: 0.5133 - val_acc: 0.8098 AC FW CW [[  6  13   4]  [  1 153   3]  [  4  14   7]]
 24. 1704/1704 [==============================] - 0s - loss: 0.3292 - acc: 0.8750 - val_loss: 0.5819 - val_acc: 0.8195 AC FW CW [[ 18   7   1]  [  9 134   3]  [  7  10  16]]
 25. 1845/1845 [==============================] - 0s - loss: 0.3565 - acc: 0.8737 - val_loss: 0.6214 - val_acc: 0.8000 AC FW CW [[  1  13   7]  [  0 150   1]  [  2  18  13]]
+
+## 21-06-2017 (Wednesday, week 12)
+### Thesis
+Worked on method & approach
+
+## 22-06-2017 (Thursday, week 12)
+### Thesis
+Worked on literature review
+
+## 23-06-2017 (Friday, week 12)
+### Thesis
+Worked on method & approach
+
+## 24-06-2017 (Saturday, week 12)
+### Results
+Collect: accuracy, loss, description (avg time, num crashes/completions)
+
+#### CNN
+Conv 8x8/4 out 32
+Conv 4x4/2 out 64
+Conv 3x3/1 out 64
+Flatten
+FC512
+DR0.5
+FC3
+lr 0.0001
+45 epochs peak accuracy = 80%
+
+Testing different number of trajectories (accuracy, loss, confusion matrix):
+1. 44/44 [==============================] - 0s - loss: 0.3651 - acc: 0.7955 - val_loss: 1.5763 - val_acc: 0.4585 AC FW CW [[ 0 14 18]  [ 0 77 70]  [ 0  9 17]]
+2. 108/108 [==============================] - 0s - loss: 0.4084 - acc: 0.8333 - val_loss: 0.9561 - val_acc: 0.5707 AC FW CW [[ 11  22   5]  [ 21 105  10]  [  6  24   1]]
+3. 214/214 [==============================] - 0s - loss: 0.2550 - acc: 0.9112 - val_loss: 0.8652 - val_acc: 0.6390 AC FW CW [[  1  20   7]  [ 10 122  20]  [  2  15   8]]
+4. 251/251 [==============================] - 0s - loss: 0.1994 - acc: 0.9363 - val_loss: 0.8491 - val_acc: 0.6488 AC FW CW [[  3  13  13]  [  8 121  21]  [  3  14   9]]
+5. 299/299 [==============================] - 0s - loss: 0.2570 - acc: 0.9264 - val_loss: 0.8203 - val_acc: 0.6976 AC FW CW [[  3  14   7]  [ 12 130   6]  [  4  19  10]]
+6. 486/486 [==============================] - 0s - loss: 0.2602 - acc: 0.9095 - val_loss: 1.2027 - val_acc: 0.5805 AC FW CW [[  1   8  21]  [ 16 104  29]  [  0  12  14]]
+7. 534/534 [==============================] - 0s - loss: 0.2597 - acc: 0.9195 - val_loss: 1.2224 - val_acc: 0.5415 AC FW CW [[ 1 12 26]  [ 1 91 47]  [ 1  7 19]]
+8. 578/578 [==============================] - 0s - loss: 0.2646 - acc: 0.9256 - val_loss: 0.8898 - val_acc: 0.6927 AC FW CW [[  0  16  12]  [  1 127  24]  [  0  10  15]]
+9. 641/641 [==============================] - 0s - loss: 0.2660 - acc: 0.9158 - val_loss: 1.0933 - val_acc: 0.6195 AC FW CW [[ 0  8 20]  [ 1 98 41]  [ 0  8 29]]
+10. 734/734 [==============================] - 0s - loss: 0.2842 - acc: 0.9183 - val_loss: 0.9653 - val_acc: 0.7073 AC FW CW [[  3  11   9]  [ 13 123  16]  [  1  10  19]]
+11. 837/837 [==============================] - 0s - loss: 0.2968 - acc: 0.9068 - val_loss: 0.8159 - val_acc: 0.7024 AC FW CW [[  6  15  11]  [  6 131  10]  [  5  14   7]]
+12. 870/870 [==============================] - 0s - loss: 0.3033 - acc: 0.9115 - val_loss: 0.8216 - val_acc: 0.6976 AC FW CW [[  5  12  12]  [  5 127  26]  [  1   6  11]]
+13. 943/943 [==============================] - 0s - loss: 0.2956 - acc: 0.9046 - val_loss: 0.7619 - val_acc: 0.7659 AC FW CW [[  4   6  11]  [  4 137  16]  [  3   8  16]]
+14. 981/981 [==============================] - 0s - loss: 0.2855 - acc: 0.9103 - val_loss: 0.7940 - val_acc: 0.7659 AC FW CW [[  5  14  12]  [  3 141   5]  [  4  10  11]]
+15. 1028/1028 [==============================] - 0s - loss: 0.2825 - acc: 0.9202 - val_loss: 0.9139 - val_acc: 0.7463 AC FW CW [[  3  10  14]  [  2 140   8]  [  5  13  10]]
+16. 1075/1075 [==============================] - 0s - loss: 0.3027 - acc: 0.9060 - val_loss: 0.7939 - val_acc: 0.7366 AC FW CW [[  2  10  16]  [  2 130  15]  [  2   9  19]]
+17. 1221/1221 [==============================] - 0s - loss: 0.2958 - acc: 0.9058 - val_loss: 0.7750 - val_acc: 0.7415 AC FW CW [[  7  11   8]  [  0 129   9]  [  4  21  16]]
+18. 1324/1324 [==============================] - 0s - loss: 0.3265 - acc: 0.8860 - val_loss: 0.6421 - val_acc: 0.7659 AC FW CW [[  4   8   9]  [  2 133  14]  [  6   9  20]]
+19. 1404/1404 [==============================] - 0s - loss: 0.3320 - acc: 0.8718 - val_loss: 0.6049 - val_acc: 0.7659 AC FW CW [[ 11  15  10]  [  4 129   6]  [  3  10  17]]
+20. 1446/1446 [==============================] - 0s - loss: 0.3695 - acc: 0.8624 - val_loss: 0.4065 - val_acc: 0.8537 AC FW CW [[  5   7   8]  [  2 157   4]  [  2   7  13]]
+21. 1496/1496 [==============================] - 0s - loss: 0.3751 - acc: 0.8603 - val_loss: 0.5809 - val_acc: 0.7902 AC FW CW [[  9  10  16]  [  0 142   9]  [  3   5  11]]
+22. 1553/1553 [==============================] - 0s - loss: 0.3650 - acc: 0.8583 - val_loss: 0.5015 - val_acc: 0.8244 AC FW CW [[  5   6   7]  [  4 152   5]  [  4  10  12]]
+23. 1606/1606 [==============================] - 0s - loss: 0.3599 - acc: 0.8624 - val_loss: 0.6343 - val_acc: 0.8000 AC FW CW [[  8  13   4]  [  4 151   1]  [  2  17   5]]
+24. 1703/1703 [==============================] - 0s - loss: 0.3729 - acc: 0.8602 - val_loss: 0.5644 - val_acc: 0.7756 AC FW CW [[ 10  10   8]  [  7 137   2]  [  4  15  12]]
+25. 1845/1845 [==============================] - 0s - loss: 0.3848 - acc: 0.8564 - val_loss: 0.5357 - val_acc: 0.8195 AC FW CW [[  9   9   1]  [  1 151   1]  [  9  16   8]]
+
+Create various models:
+ff 25 traj - done
+cnn 25 traj - done
+ff dagger various - ...
+cnn dagger various - ...
+
+Test them:
+Moving goal
+Moving buildings
+
+![](https://raw.githubusercontent.com/MJvRijn/drone-learning/master/logbook/eval_locations.png)
+
+
+cnn 25 traj evaluation:
+General:
+The drone has exploratory tendencies (does not sit still and turn)
+The drone flies straight at the red square when visible and turns to correct its path when close
+The drone avoids the concrete barriers, blue house and brown plaything
+The drone sometimes flies into the white houses and the grey wall
+The drone likes to fly into the grey nothingness at the edge of the world
+The drone sometimes gets stuck turning back ans forth
+
+10 trajectory test (max 1 min):
+1. The drone flies anticlockwise around the outside of the buildings, no goal achieved, no crash
+2. The drone flied around the barriers and to the red square, goal achieved in 20s, no crash
+3. The drone crashes into the barrier after 4 seconds
+4. The drone turns clockwise and flies to the north, stopping to turn back and forth indefinitively, no goal achieved, no crash
+5. Same behaviour as 1, no goal, no crash
+6. Flies past the goal and gets stuck just like 4, no goal, no crash
+7. Immediately gets stuck like 4, no goal, no crash
+8. Flies to right of goal, crashes into white building at 17s
+9. Turns left, flies past goal and crashes into concrete barrier at 22s
+10. Same behaviour as 8, crash into white biulding at 23s
+
+ff 25 traj evaluation:
+General:
+The drone has limited exploratory tendencies
+The drone flies at the red square when visible, and makes constant course corrections on the way
+The drone flies into the white house, but is hesitant about it
+The drone flies into the grey wall and brown plaything
+The drone avoids the concrete barriers and blue house
+The drone turn anticlockwise and moves forward when in grey areas
+
+10 trajectory test (max 1 min):
+1. Flies to goal, achieved at 22s
+2. Crash into brown plaything at 18s
+3. Flies to goal, achieved at 10s
+4. Turns clockwise, gets stuck looking at white house, crashes into it at 38s
+5. Flies to wall and crashes at 7s
+6. Flies to goal, achieves at 9s
+7. Flies forward, gets stuck looking north, gets unstuck, flies past goal, time up, no crash, no goal
+8. Flies left of goal, crashes into blue building window at 13s
+9. Same as 8, but crash at 22s
+10. Goes left, crashes into blue building at 21s
