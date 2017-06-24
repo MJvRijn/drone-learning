@@ -432,7 +432,7 @@ Flatten
 FC512
 DR0.5
 FC3
-lr 0.0001
+lr 0.00005
 45 epochs peak accuracy = 80%
 
 Testing different number of trajectories (accuracy, loss, confusion matrix):
@@ -516,3 +516,38 @@ The drone turn anticlockwise and moves forward when in grey areas
 8. Flies left of goal, crashes into blue building window at 13s
 9. Same as 8, but crash at 22s
 10. Goes left, crashes into blue building at 21s
+
+Dagger:
+collect 10 trajectories per iteration
+
+ff-dagger:
+1. 2737/2737 [==============================] - 0s - loss: 0.5275 - acc: 0.7965 - val_loss: 0.8371 - val_acc: 0.6842 AC FW CW [[  9  36  23]  [  0 155   9]  [  2  26  44]]
+2. 3535/3535 [==============================] - 0s - loss: 0.6209 - acc: 0.7488 - val_loss: 0.7326 - val_acc: 0.6607 AC FW CW [[ 20  24  29]  [  6 150  16]  [ 21  37  89]]
+3. 4782/4782 [==============================] - 1s - loss: 0.7119 - acc: 0.6999 - val_loss: 0.8220 - val_acc: 0.6591 AC FW CW [[ 26  24  67]  [  3 158  57]  [ 10  20 166]]
+4. 6529/6529 [==============================] - 1s - loss: 0.7766 - acc: 0.6615 - val_loss: 1.1920 - val_acc: 0.4897 AC FW CW [[ 58 129  23]  [  7 239   5]  [ 27 179  58]]
+
+
+Observation:
+The accuracy decreased with DAGGER, this may be due to the fact that a much smaller proportion of the dagger dataset contains the red square than the original dataset, ans that the action FORWARD is less common. This make the classification task harder.
+
+Observation:
+The performance of the drone decreases with DAGGER, as it becomes much more indecive. Maybe a different form of DAGGER where the drone follows the expert overrides, and only records those, would be better. Known henceforth as SPREADINGKNIFE.
+
+Observation:
+After 4 dagger iterations the training set is pretty balanced, from original 72% forward: Counter({'FORWARD': 2574, 'CLOCKWISE': 2560, 'ANTICLOCKWISE': 2120})
+
+cnn-dagger:
+1. 2475/2475 [==============================] - 0s - loss: 0.4570 - acc: 0.8065 - val_loss: 0.7520 - val_acc: 0.7236 AC FW CW [[ 28  19   9]  [ 11 161   2]  [ 13  22  10]]
+2. 3478/3478 [==============================] - 0s - loss: 0.6015 - acc: 0.7386 - val_loss: 0.7262 - val_acc: 0.6762 AC FW CW [[ 32  32  21]  [ 15 189   8]  [ 16  33  40]]
+3. 4325/4325 [==============================] - 1s - loss: 0.6278 - acc: 0.7348 - val_loss: 0.8619 - val_acc: 0.6021 AC FW CW [[ 49  48  29]  [ 20 202   9]  [ 34  51  38]]
+4. 5163/5163 [==============================] - 1s - loss: 0.6643 - acc: 0.7155 - val_loss: 0.9240 - val_acc: 0.5829 AC FW CW [[ 65  44  46]  [ 23 206  31]  [ 46  49  63]]
+
+
+Observation: 
+Dagger seems to be overriding good policy, good argument for spreadingknife. Spreadingknife should only override before critical mistakes to preserve good policy
+
+Observation:
+CNN dagger dataset less balanced than ff:
+Counter({'FORWARD': 2661, 'ANTICLOCKWISE': 1588, 'CLOCKWISE': 1487})
+Dataset also 1100 smaller (shorter trajectories)
+
