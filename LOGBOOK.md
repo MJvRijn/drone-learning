@@ -551,3 +551,44 @@ CNN dagger dataset less balanced than ff:
 Counter({'FORWARD': 2661, 'ANTICLOCKWISE': 1588, 'CLOCKWISE': 1487})
 Dataset also 1100 smaller (shorter trajectories)
 
+ff 25 traj + 40 dagger traj evaluation:
+General:
+The drone has reasonable exploratory tendencies
+The drone flies at the red square when straight ahead, but makes no course corrections
+The drone flies into the grey wall, brown plaything, white house and blue house windows
+The drone avoids the concrete barriers and blue house
+The drone flies straight in grey areas
+
+10 trajectory test (max 1 min):
+1. Flies straight into the greyness, no goal, no crash
+2. Flies forward, gets confused, no goal, no crash
+3. Flies forward, turns left, flies into greyness, no goal, no crash
+4. Turns clockwise slightly confused, flies past goal to the left and crashes into NE house at 26s
+5. Flies away into greyness, no goal, no crash
+6. Flies forward slightly confused, flies away into northern greyness, no goal, no crash
+7. Same as 6, no goal, no crash
+8. Flies straight towards goal, achieves at 6s
+9. Turns right, crashes into building at 6s
+10. Flies straight towards goal, achieves at 11s
+
+cnn 25 traj + 40 dagger evaluation:
+General:
+The drone has slight exploratory tendencies
+The drone flies at the red square when it is staight ahead, but sometimes veers off to one side.
+The drone avoids the brown plaything, but crashes into other buildings ocasionally
+In grey areas the drone turns around looking for a target
+The drone is generally very indecisive
+
+10 trajectory test (max 1 min):
+1. Indecisively flies around barrier, achieves goal at 32s
+2. The drone flied around the barriers and to the red square, goal achieved in 20s, no crash
+3. Similar to 2, but crashes into blue building at 26s
+4. Crashes into concrete barrier at 8s
+5. Hugs grey wall, crashes into it at 50s
+6. Hugs blue building, crashes into it at 18s
+7. Gets confused, crashes into blue building at 18s
+8. Flies to left of goal, crashes into blue building at 25s
+9. Crashes into white building at 7s
+10. Flies indecisively to goal, crashes into blue building at 17s
+
+
