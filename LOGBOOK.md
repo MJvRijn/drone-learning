@@ -591,4 +591,51 @@ The drone is generally very indecisive
 9. Crashes into white building at 7s
 10. Flies indecisively to goal, crashes into blue building at 17s
 
+Observation:
+Terrible from cnn which seems more interested in buildings now than the goal. FF performs pretty similarly to before but in a different way.
+
+Time for spreadingknife (sk)
+
+## 25-06-2017 (Sunday, week 12)
+### Plan
+Outline of the plan for the final week:
+Sunday: 
+* Complete thesis method & approach
+* Complete thesis evaluation
+
+Monday:
+* Collect results from final simplified dagger tests (sk)
+* Collect results for moving goal, buildings
+* Create visualisations for results
+* Hand in logbook
+
+Tuesday:
+* Make presentation
+* Write thesis results
+
+Wednesday:
+* Write thesis conclusion & discussion
+* Prepare presentation
+
+Thursday:
+* Present
+* Update thesis introduction & write abstract
+* Review & amend thesis
+
+Friday:
+* Final thesis review
+* Hand in thesis
+
+### Thesis
+Worked on method & approach, evaluation
+
+## 26-06-2017 (Monday, week 13)
+### DAGGER
+SK: ~500 samples per iteration
+
+sk-ff:
+1. 2309/2309 [==============================] - 0s - loss: 0.4895 - acc: 0.8133 - val_loss: 0.6176 - val_acc: 0.7969 AC FW CW [[  5  20   9]  [  1 169   2]  [  2  18  30]]
+2. 2769/2769 [==============================] - 0s - loss: 0.4791 - acc: 0.8075 - val_loss: 0.8939 - val_acc: 0.7068 AC FW CW [[  6  35   6]  [  1 195   2]  [  6  40  16]]
+
+
 

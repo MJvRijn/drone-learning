@@ -61,6 +61,7 @@ rospy.init_node('control', anonymous=True)
 rate = rospy.Rate(settings.get_rate())
 airborne = False
 
+i = 0
 while not rospy.is_shutdown():
 	action = controller.get_action()
 
@@ -105,6 +106,8 @@ while not rospy.is_shutdown():
 		publisher.publish_move(action)
 
 		if record or (dagger and override):
+			output.logi('Override {}'.format(i))
+			i += 1
 			recording.record(action)
 
 	# Sleep
