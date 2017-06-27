@@ -1,5 +1,10 @@
 
 # Logbook
+Matthew van Rijn (10779353)
+
+Project: Imitation learning with drones
+
+Supervisor: Tom Runia
 
 ## 13-04-2017 (Thursday, week 2)
 ### General
@@ -637,5 +642,7 @@ sk-ff:
 1. 2309/2309 [==============================] - 0s - loss: 0.4895 - acc: 0.8133 - val_loss: 0.6176 - val_acc: 0.7969 AC FW CW [[  5  20   9]  [  1 169   2]  [  2  18  30]]
 2. 2769/2769 [==============================] - 0s - loss: 0.4791 - acc: 0.8075 - val_loss: 0.8939 - val_acc: 0.7068 AC FW CW [[  6  35   6]  [  1 195   2]  [  6  40  16]]
 
+### General
+Final meeting with supervisor. Discussed plan for final days and reviewed thesis draft.
 
 
